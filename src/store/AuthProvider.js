@@ -1,11 +1,10 @@
 import { createContext, useReducer, useContext } from "react";
 
 const initialState = {
-  isAuthenticated: localStorage.getItem("token") ? true : false,
+  isAuthenticated: !!localStorage.getItem("token"),
   error: "",
 };
 
-// Reducer function to manage authentication state
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -25,10 +24,8 @@ const authReducer = (state, action) => {
   }
 };
 
-// Create the auth context
 const AuthContext = createContext();
 
-// AuthProvider component to provide authentication state and actions
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -39,7 +36,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to access authentication context
 const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

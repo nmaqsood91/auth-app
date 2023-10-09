@@ -10,14 +10,11 @@ const Login = () => {
   });
 
   const handleLogin = () => {
-    if (
-      credentials.username === "testuser" &&
-      credentials.password === "testpassword"
-    ) {
-      dispatch({ type: "LOGIN_SUCCESS" });
-    } else {
-      dispatch({ type: "LOGIN_FAILURE" });
-    }
+    const { username, password } = credentials;
+    const isCredentialsValid =
+      username === "testuser" && password === "testpassword";
+
+    dispatch({ type: isCredentialsValid ? "LOGIN_SUCCESS" : "LOGIN_FAILURE" });
   };
 
   if (state.isAuthenticated) {

@@ -4,13 +4,9 @@ import { useAuth } from "../store/AuthProvider";
 const Home = () => {
   const { state, dispatch } = useAuth();
 
-  const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-  };
+  const handleLogout = () => dispatch({ type: "LOGOUT" });
 
-  if (!state.isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+  if (!state.isAuthenticated) return <Navigate to="/login" />;
 
   return (
     <div className="container mt-5">
@@ -21,4 +17,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
